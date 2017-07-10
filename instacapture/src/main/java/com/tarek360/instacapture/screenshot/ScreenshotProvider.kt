@@ -3,8 +3,8 @@ package com.tarek360.instacapture.screenshot
 import android.app.Activity
 import android.graphics.Bitmap
 import android.view.View
+import io.reactivex.Observable
 
-import rx.Observable
 
 /**
  * Created by tarek on 5/17/16.

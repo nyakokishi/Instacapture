@@ -17,9 +17,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * Created by tarek on 10/4/16.
@@ -78,9 +80,9 @@ public final class Utility {
     public static Observable<File> getScreenshotFileObservable(@NonNull final Context context,
                                                                @NonNull final Bitmap bitmap) {
 
-        return Observable.create(new Observable.OnSubscribe<File>() {
+        return Observable.create(new ObservableOnSubscribe<File>() {
             @Override
-            public void call(final Subscriber<? super File> subscriber) {
+            public void subscribe(ObservableEmitter<File> emitter) throws Exception {
                 OutputStream outputStream = null;
                 try {
                     File screenshotFile = Utility.getScreenshotFile(context);
@@ -92,12 +94,12 @@ public final class Utility {
                     outputStream.flush();
                     Log.i("zxzx", "2Thread.currentThread(): " + Thread.currentThread());
 
-                    subscriber.onNext(screenshotFile);
-                    subscriber.onCompleted();
+                    emitter.onNext(screenshotFile);
+                    emitter.onComplete();
 
                     Logger.INSTANCE.d("Screenshot saved to " + screenshotFile.getAbsolutePath());
                 } catch (final IOException e) {
-                    subscriber.onError(e);
+                    emitter.onError(e);
                 } finally {
                     if (outputStream != null) {
                         try {
@@ -108,6 +110,7 @@ public final class Utility {
                     }
                 }
             }
+
         }).subscribeOn(Schedulers.io());
     }
 }

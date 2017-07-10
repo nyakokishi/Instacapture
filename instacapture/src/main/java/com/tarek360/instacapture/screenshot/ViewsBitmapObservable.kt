@@ -5,9 +5,8 @@ import android.graphics.Bitmap
 import android.view.View
 
 import com.tarek360.instacapture.exception.IllegalScreenSizeException
+import io.reactivex.Observable
 
-import rx.Observable
-import rx.functions.Func0
 
 /**
  * Created by tarek on 5/17/16.

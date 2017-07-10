@@ -3,15 +3,14 @@ package com.tarek360.instacapture
 import android.app.Activity
 import android.graphics.Bitmap
 import android.view.View
-
 import com.tarek360.instacapture.exception.ActivityNotRunningException
 import com.tarek360.instacapture.listener.ScreenCaptureListener
 import com.tarek360.instacapture.screenshot.ScreenshotProvider
 import com.tarek360.instacapture.utility.Logger
-
-import rx.Observable
-import rx.Subscriber
-import rx.android.schedulers.AndroidSchedulers
+import io.reactivex.Observable
+import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 
 /**
  * Created by tarek on 5/20/17.
@@ -28,8 +27,11 @@ object Instacapture {
 
         screenCaptureListener.onCaptureStarted()
 
-        captureRx(activity, *ignoredViews).subscribe(object : Subscriber<Bitmap>() {
-            override fun onCompleted() {}
+        captureRx(activity, *ignoredViews).subscribe(object : Observer<Bitmap> {
+
+            override fun onComplete() = Unit
+
+            override fun onSubscribe(d: Disposable?) = Unit
 
             override fun onError(e: Throwable) {
                 Logger.e(ERROR_SCREENSHOT_CAPTURE_FAILED)
