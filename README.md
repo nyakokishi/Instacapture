@@ -1,4 +1,4 @@
-# Instacapture 2.0 [![Release](https://jitpack.io/v/tarek360/instacapture.svg)](https://jitpack.io/#tarek360/instacapture)
+# Instacapture 3.0 [![Release](https://jitpack.io/v/nyakokishi/instacapture.svg)](https://jitpack.io/#nyakokishi/instacapture)
 
 Android library to capture screenshot from your app
 
@@ -20,7 +20,7 @@ Add this to your module `build.gradle` file:
 ```gradle
 dependencies {
 	...
-	 compile "com.github.tarek360:instacapture:2.0.0-kotlin-beta1"
+	 compile "com.github.tarek360:instacapture:3.0.0-rxjava2-beta1"
 }
 ```
 
